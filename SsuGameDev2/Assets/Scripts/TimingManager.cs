@@ -4,30 +4,45 @@ using UnityEngine;
 
 public class TimingManager : MonoBehaviour
 {
-    enum State{Wait,Select,Result,End}
+    enum State { Wait, Select, Result, End }
 
     State state;
 
-    float timer =0;//초세는 시계
+    float timer = 0;//초세는 시계
 
-    float waitTime= 3f;//게임진입시 대기시간
-    float selectTime= 1f;//행동 선택시간
-    float ResultTime= 1f;//결과 보여주는 시간
+    float waitTime = 3f;//게임진입시 대기시간
+    float selectTime = 1f;//행동 선택시간
+    float ResultTime = 1f;//결과 보여주는 시간
 
 
-    void BeSelectTime()
+    bool canInputChange = true;
+    bool CanInputChange
     {
-         state=State.Select;
-        //inputManger에서 bool값 하나 받아서 true로 바꿔서 값넣도록 허용하게 하기
+        get
+        {
+            return canInputChange;
+        }
+        set
+        {
+            canInputChange = value;
+        }
     }
-    void BeResultTime()
+    void BeSelectTime()//입력값 넣기
     {
-        state=State.Result;
-        //inputManger에서 bool값 하나 받아서 true로 바꿔서 값못넣도록 비허용하게 하기
+        state = State.Select;
+        CanInputChange = true;//입력값 바꿀수 있음
+
     }
-    void BeEndTime()
+    void BeResultTime()// 입력값 결과보여주기
     {
-        state=State.End;
+        state = State.Result;
+        CanInputChange = false;//입력값 바꿀수없음
+
+    }
+    void BeEndTime()//둘중한명 hp가 0이되어 끝날때
+    {
+        state = State.End;
+        CanInputChange = false;
         //결과보여주기
     }
 
@@ -35,56 +50,47 @@ public class TimingManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        state=State.Wait;
+        state = State.Wait;
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer+=Time.deltaTime;
-        if(state==State.Wait)
-        {           
-            if(timer>waitTime)
-            {   timer=0f;
-               
+        timer += Time.deltaTime;
+        if (state == State.Wait)//게임 시작전 대기시간
+        {
+            if (timer > waitTime)
+            {
+                timer = 0f;
+
                 BeSelectTime();
             }
         }
-        else if(state==State.Select)
-        {          
-            if(timer>selectTime)
+        else if (state == State.Select)//행동어떤걸 할지 선택
+        {
+            if (timer > selectTime)
             {
-                timer=0;
+                timer = 0;
                 BeResultTime();
             }
         }
-        else if(state==State.Result)
+        else if (state == State.Result)//행동보여주기
         {
-            //var int Result1= GetPlayer1Result() player1의 결과값 가져오기
-            //var int Result2= GetPlayer2Result() player2의 결과값 가져오기
-            //int Result = Compare(Result1,Result2 ) 결과값 비교 로직
-            // if(timer>ResultTime)
-            //  {
-            //     if(result==1)
-            //     {
-            //     //player1 체력깎기
-            //     }
-            //     else if(result == 2)
-            //     {
-            //     //player2 체력깎기
-            //     }
-            //     else if(result==3)
-            //     {
-            //     //체력 변화없음 및 특정행동
-            //     }
+            //여기에 둘의 값비교 및 결과 로직작성해주셔서 비교해주면 됩니다.
 
-            //     if() 만약 둘중한명의 플레이어의 목숨이 0일경우
-            //     {
-                 // BeEndTime();
-            //     }
-                timer=0;
-                BeResultTime();
-            //} 
+            timer = 0;
+            if (timer >= ResultTime)
+            {
+
+                //     if() 만약 둘중한명의 플레이어의 목숨이 0일경우  
+                {
+                    // BeEndTime();
+                }
+                //else //그게아니라면
+                {
+                    BeSelectTime();
+                }
+            }
         }
     }
 }
