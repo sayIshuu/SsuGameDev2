@@ -24,23 +24,10 @@ public class InputManager : MonoBehaviour
 
     }
 
-    /*
-    void Player1Choose(Sign choice)
-    {
-        player1Choice = choice;
-        Player2Choose();
-        DetermineWinner();
-    }
 
-    void Player2Choose()
-    {
-        // 임의로 Player2의 선택을 정하는 코드를 구현할 수 있습니다.
-        // 예를 들어, Random.Range()를 사용하여 무작위로 선택하거나,
-        // 실제로는 네트워크 통신 등을 통해 상대방의 선택을 받을 수 있습니다.
-        player2Choice = (Sign)Random.Range(1, 4);
-    }
-    */
-
+//======================수정예정========================
+//: 추후에 리턴값이 있는 함수로 변경하여 아래 Debug.Log -> return 으로 수정할예정입니다.
+//  그 리턴값을 TimingManager의 결과확인함수에서 받아오면 됩니다.
     void DetermineWinner()
     {
         //플레이어1의 공격
@@ -160,6 +147,9 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
+
+//추가할부분=====타이밍매니저의 불변수를 가져와서 상태선택가능한지로 큰 조건문 추가해주세요.====
+//디폴트(시간 내 미 입력)는 Sign.None으로 유지해주시면 됩니다.
         //=============Player01 키입력===============
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -193,6 +183,7 @@ public class InputManager : MonoBehaviour
         {
             player2Choice = Sign.Charge;
         }
+//====================================================================
 
 
 
