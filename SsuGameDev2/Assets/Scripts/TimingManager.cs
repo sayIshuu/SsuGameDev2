@@ -6,17 +6,21 @@ public class TimingManager : MonoBehaviour
 {
     enum State { Wait, Select, Result, End }
 
+
+
     State state;
 
-    float timer = 0;//초세는 시계
+    float timer = 0f;//초세는 시계
 
-    float waitTime = 3f;//게임진입시 대기시간
-    float selectTime = 1f;//행동 선택시간
-    float ResultTime = 1f;//결과 보여주는 시간
+    [SerializeField] float waitTime = 3f;//게임진입시 대기시간
+    [SerializeField] float selectTime = 1f;//행동 선택시간
+    [SerializeField] float ResultTime = 1f;//결과 보여주는 시간
+
+    [SerializeField] InputManager inputManager;
 
 
     bool canInputChange = true;
-    bool CanInputChange
+    public bool CanInputChange
     {
         get
         {
@@ -59,8 +63,10 @@ public class TimingManager : MonoBehaviour
         timer += Time.deltaTime;
         if (state == State.Wait)//게임 시작전 대기시간
         {
+           
             if (timer > waitTime)
             {
+                Debug.Log("대기시간");
                 timer = 0f;
 
                 BeSelectTime();
@@ -68,25 +74,28 @@ public class TimingManager : MonoBehaviour
         }
         else if (state == State.Select)//행동어떤걸 할지 선택
         {
+            
             if (timer > selectTime)
             {
-                timer = 0;
+                Debug.Log("선택시간");
+                timer = 0f;
                 BeResultTime();
             }
         }
         else if (state == State.Result)//행동보여주기
         {
             //여기에 둘의 값비교 및 결과 로직작성해주셔서 비교해주면 됩니다.
-
-            timer = 0;
+            inputManager.DetermineWinner();
+            
             if (timer >= ResultTime)
             {
-
-                //     if() 만약 둘중한명의 플레이어의 목숨이 0일경우  
+                timer = 0f;
+                if(HPmanager.Instance.player01CurrentHp == 0 || HPmanager.Instance.player02CurrentHp == 0) //만약 둘중한명의 플레이어의 목숨이 0일경우  
                 {
-                    // BeEndTime();
+                    Debug.Log("종료");
+                    BeEndTime();
                 }
-                //else //그게아니라면
+                else //그게아니라면
                 {
                     BeSelectTime();
                 }

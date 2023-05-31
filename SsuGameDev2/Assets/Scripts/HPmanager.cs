@@ -32,7 +32,7 @@ public class HPmanager : MonoBehaviour
 
     [SerializeField] private Slider player01HpBar;
     [SerializeField] private Slider player02HpBar;
-    [SerializeField] private float maxHp, player01CurrentHp, player02CurrentHp;
+    public float maxHp, player01CurrentHp, player02CurrentHp;
 
     public void player01HpDown(int damege)
     {
