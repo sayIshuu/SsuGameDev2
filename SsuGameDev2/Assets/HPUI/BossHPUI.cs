@@ -53,9 +53,9 @@ public class BossHPUI : MonoBehaviour
     void Start()
     {
         boss = GetComponent<Boss>();
-        maxHealth = boss.health;
+        maxHealth = boss.health;// boss대신 가져온 스크립트 내부 변수명에 health가 있어야합니다.
     
-      ;
+      
     }
 
  
@@ -63,10 +63,7 @@ public class BossHPUI : MonoBehaviour
     {
         boss.health = Mathf.Clamp(boss.health, 0, maxHealth);
         UpdateHealthUI();
-        if(boss.haveWaitTime)
-        {
-            UION=true;
-        }
+
         
     }
 
