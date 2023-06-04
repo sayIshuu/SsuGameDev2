@@ -35,14 +35,51 @@ public class InputManager : MonoBehaviour
 //  추가로 반복되는 코드가 많아서 더러운데 일단 기능구현부터 하고 추후에 수정할 수 있으면 하겠습니다.
     public void DetermineWinner()
     {
+        if(player1Choice == Sign.None)
+        {
+            /*
+            if (player2Choice == Sign.None)
+            {
+                Debug.Log("키입력대기");
+            }
+            */
+            if (player2Choice == Sign.Charge)
+            {
+                player2Energy++;
+                Debug.Log("Nothing Happen");
+            }
+            else if (player2Choice == Sign.Block)
+            {
+                Debug.Log("Nothing Happen");
+            }
+            else if (player2Choice == Sign.Pa)
+            {
+                Debug.Log("Player 2의 공격 성공!");
+                HPmanager.Instance.player01HpDown(1);
+                player2Energy = 0;
+            }
+            else if (player2Choice == Sign.EnergyPa)
+            {
+                Debug.Log("Player 2의 공격 성공!");
+                HPmanager.Instance.player01HpDown(3);
+                player2Energy = 0;
+            }
+        }
+
+
         //플레이어1의 공격
         if (player1Choice == Sign.Pa)
         {
-            if (player2Choice == Sign.Charge)
+            if(player2Choice == Sign.None)
+            {
+                player2Energy = 0;
+                HPmanager.Instance.player02HpDown(1);
+            }
+            else if (player2Choice == Sign.Charge)
             {
                 player2Energy = 0;
                 Debug.Log("Player 1의 공격 성공!");
-                HPmanager.Instance.player02HpDown(player1Energy);
+                HPmanager.Instance.player02HpDown(1);   //일반 Pa데미지는 모은기 양 -> 10으로 고정
             }
             else if(player2Choice == Sign.Block)
             {
@@ -50,24 +87,13 @@ public class InputManager : MonoBehaviour
             }
             else if(player2Choice == Sign.Pa)
             {
-                if (player1Energy > player2Energy)
-                {
-                    Debug.Log("Player 1의 공격 성공!");
-                    HPmanager.Instance.player02HpDown(player1Energy - player2Energy);
-                }
-                else if (player2Energy > player1Energy)
-                {
-                    Debug.Log("Player 2의 공격 성공!");
-                    HPmanager.Instance.player01HpDown(player2Energy - player1Energy);
-                }
-                else
-                    Debug.Log("힘의 균형");
+                Debug.Log("Pa 상쇄");
                 player2Energy = 0;
             }
             else if(player2Choice == Sign.EnergyPa)
             {
                 Debug.Log("Player 2의 공격 성공!");
-                HPmanager.Instance.player01HpDown(player2Energy - player1Energy);
+                HPmanager.Instance.player01HpDown(3);
                 player2Energy = 0;
             }
             player1Energy = 0;
@@ -76,7 +102,11 @@ public class InputManager : MonoBehaviour
         //플레이어1의 막기
         if (player1Choice == Sign.Block)
         {
-            if (player2Choice == Sign.Charge)
+            if(player2Choice == Sign.None)
+            {
+                Debug.Log("Nothing Happen");
+            }
+            else if (player2Choice == Sign.Charge)
             {
                 player2Energy++;
                 Debug.Log("Nothing Happen");
@@ -93,7 +123,7 @@ public class InputManager : MonoBehaviour
             else if (player2Choice == Sign.EnergyPa)
             {
                 Debug.Log("Player 2의 공격 성공!");
-                HPmanager.Instance.player01HpDown(player2Energy - 1);
+                HPmanager.Instance.player01HpDown(3);
                 player2Energy = 0;
             }
         }
@@ -102,7 +132,11 @@ public class InputManager : MonoBehaviour
         if (player1Choice == Sign.Charge)
         {
             player1Energy++;
-            if (player2Choice == Sign.Charge)
+            if(player2Choice == Sign.None)
+            {
+                Debug.Log("Nothing Happen");
+            }
+            else if (player2Choice == Sign.Charge)
             {
                 player2Energy++;
                 Debug.Log("Nothing Happen");
@@ -115,12 +149,12 @@ public class InputManager : MonoBehaviour
             {
                 player2Energy = 0; player1Energy = 0;
                 Debug.Log("Player 2의 공격 성공!");
-                HPmanager.Instance.player01HpDown(player2Energy);
+                HPmanager.Instance.player01HpDown(1);
             }
             else if (player2Choice == Sign.EnergyPa)
             {
                 Debug.Log("Player 2의 공격 성공!");
-                HPmanager.Instance.player01HpDown(player2Energy);
+                HPmanager.Instance.player01HpDown(3);
                 player2Energy = 0; player1Energy = 0;
             }
         }
@@ -128,27 +162,32 @@ public class InputManager : MonoBehaviour
         //플레이어1의 에너지파
         if (player1Choice == Sign.EnergyPa)
         {
-            if (player2Choice == Sign.Charge)
+            if(player2Choice == Sign.None)
+            {
+                Debug.Log("Player 1의 공격 성공!");
+                HPmanager.Instance.player02HpDown(3);
+            }
+            else if (player2Choice == Sign.Charge)
             {
                 player2Energy = 0;
                 Debug.Log("Player 1의 공격 성공!");
-                HPmanager.Instance.player02HpDown(player1Energy);
+                HPmanager.Instance.player02HpDown(3);
             }
             else if (player2Choice == Sign.Block)
             {
                 player2Energy = 0;
                 Debug.Log("Player 1의 공격 성공!");
-                HPmanager.Instance.player02HpDown(player1Energy -1);
+                HPmanager.Instance.player02HpDown(3);
             }
             else if (player2Choice == Sign.Pa)
             {
                 Debug.Log("Player 1의 공격 성공!");
-                HPmanager.Instance.player02HpDown(player1Energy - player2Energy);
+                HPmanager.Instance.player02HpDown(3);
                 player2Energy = 0;
             }
             else if (player2Choice == Sign.EnergyPa)
             {
-                Debug.Log("힘의 균형");
+                Debug.Log("에너지파 상쇄");
                 player2Energy = 0;
             }
             player1Energy = 0;
@@ -174,7 +213,11 @@ public class InputManager : MonoBehaviour
             //=============Player01 키입력===============
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                if (player1Energy >= 3)
+                if(player1Energy == 0)
+                {
+                    player1Choice = Sign.None;
+                }
+                else if (player1Energy >= 3)
                 {
                     player1Energy = 3;
                     player1Choice = Sign.EnergyPa;
@@ -194,7 +237,11 @@ public class InputManager : MonoBehaviour
             //=============Player02 키입력==============
             if (Input.GetKeyDown(KeyCode.Keypad7))
             {
-                if (player2Energy >= 3)
+                if( player2Energy == 0)
+                {
+                    player2Choice = Sign.None;
+                }
+                else if (player2Energy >= 3)
                 {
                     player2Energy = 3;
                     player2Choice = Sign.EnergyPa;
@@ -214,11 +261,12 @@ public class InputManager : MonoBehaviour
 //====================================================================
 
 
-
+        /*
         if(Input.GetKeyUp(KeyCode.Space))
         {
             //일단은 스페이스바로 결과보여주기와 리셋을 제어, 리듬시스템 조정시 이 기능 옮겨갈 예정
             DetermineWinner();
         }
+        */
     }
 }

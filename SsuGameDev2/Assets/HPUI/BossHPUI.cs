@@ -7,8 +7,7 @@ public class BossHPUI : MonoBehaviour
 {
 
 
-    [SerializeField]
-    private float lerpTimer = 0f;
+    [SerializeField] private float lerpTimer = 0f;
     public float maxHealth = 1000;
     public float chipSpeed = 2f;
     public Image frontHealthBar;
@@ -17,6 +16,7 @@ public class BossHPUI : MonoBehaviour
     bool updateUI = false;
 
     public float fillSpeed = 3f;
+    /*
     public GameObject BossUI;
 
     
@@ -42,17 +42,17 @@ public class BossHPUI : MonoBehaviour
         }
     }
    }
+    *
 
 
-
-
+    [SerializeField] GameObject boss;
 
 
 
     
     void Start()
     {
-        boss = GetComponent<Boss>();
+        boss = GetComponent<HPmanager>();
         maxHealth = boss.health;// boss대신 가져온 스크립트 내부 변수명에 health가 있어야합니다.
     
       
@@ -94,5 +94,5 @@ public class BossHPUI : MonoBehaviour
     }
 
 
-
+    */
 }
