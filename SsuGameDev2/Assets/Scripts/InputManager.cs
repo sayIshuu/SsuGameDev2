@@ -57,6 +57,7 @@ public class InputManager : MonoBehaviour
             else if (player2Choice == Sign.Pa)
             {
                 AnimatorRight.Instance.Pa();
+                AnimatorLeft.Instance.Damaged();
                // Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(1);
                 player2Energy = 0;
@@ -64,6 +65,7 @@ public class InputManager : MonoBehaviour
             else if (player2Choice == Sign.EnergyPa)
             {
                 AnimatorRight.Instance.EnergyPa();
+                AnimatorLeft.Instance.Damaged();
                 //Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(3);
                 player2Energy = 0;
@@ -105,7 +107,8 @@ public class InputManager : MonoBehaviour
             else if(player2Choice == Sign.EnergyPa)
             {
                 AnimatorRight.Instance.EnergyPa();
-                Debug.Log("Player 2의 공격 성공!");
+                AnimatorLeft.Instance.Damaged();
+                //Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(3);
                 player2Energy = 0;
             }
@@ -143,7 +146,8 @@ public class InputManager : MonoBehaviour
             else if (player2Choice == Sign.EnergyPa)
             {
                 AnimatorRight.Instance.EnergyPa();
-                Debug.Log("Player 2의 공격 성공!");
+                AnimatorLeft.Instance.Damaged();
+                //Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(3);
                 player2Energy = 0; player1Energy = 0;
             }
@@ -174,6 +178,7 @@ public class InputManager : MonoBehaviour
             else if (player2Choice == Sign.Pa)
             {
                 AnimatorRight.Instance.Pa();
+                AnimatorLeft.Instance.Damaged();
                 player2Energy = 0; player1Energy = 0;
                 //Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(1);
@@ -181,7 +186,8 @@ public class InputManager : MonoBehaviour
             else if (player2Choice == Sign.EnergyPa)
             {
                 AnimatorRight.Instance.EnergyPa();
-                Debug.Log("Player 2의 공격 성공!");
+                AnimatorLeft.Instance.Damaged();
+                //Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(3);
                 player2Energy = 0; player1Energy = 0;
             }

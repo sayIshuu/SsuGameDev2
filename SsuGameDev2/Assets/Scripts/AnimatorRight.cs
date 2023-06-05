@@ -66,4 +66,9 @@ public class AnimatorRight : MonoBehaviour
     {
         animator.SetBool("damaged", true);
     }
+
+    public void GameOver()
+    {
+        animator.SetBool("gameover", true);
+    }
 }

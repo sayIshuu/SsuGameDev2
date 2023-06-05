@@ -89,10 +89,18 @@ public class TimingManager : MonoBehaviour
             if (timer >= ResultTime)
             {
                 timer = 0f;
-                if(HPmanager.Instance.player01CurrentHp == 0 || HPmanager.Instance.player02CurrentHp == 0) //만약 둘중한명의 플레이어의 목숨이 0일경우  
+                if(HPmanager.Instance.player01CurrentHp == 0) //만약 둘중한명의 플레이어의 목숨이 0일경우  
                 {
                     Debug.Log("종료");
                     inputManager.ResetAnimation();
+                    AnimatorLeft.Instance.GameOver();
+                    BeEndTime();
+                }
+                else if(HPmanager.Instance.player02CurrentHp == 0)
+                {
+                    Debug.Log("종료");
+                    inputManager.ResetAnimation();
+                    AnimatorRight.Instance.GameOver();
                     BeEndTime();
                 }
                 else //그게아니라면
