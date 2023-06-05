@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class HPmanager : MonoBehaviour
 {
-//==================½Ì±ÛÅæÆÐÅÏÀ¸·Î Àü¿ªº¯¼öÈ­==================
+    //==================ï¿½Ì±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È­==================
     private static HPmanager instance = null;
+    float fillB;
     void Awake()
     {
         if (null == instance)
@@ -26,46 +27,82 @@ public class HPmanager : MonoBehaviour
             return instance;
         }
     }
-//=============================================================
+    //=============================================================
 
+    public float chipSpeed = 2f;
+    [SerializeField] private float lerpTimer = 0f;
+    [SerializeField] private Image player01HpBar;
 
-
-    [SerializeField] private Slider player01HpBar;
-    [SerializeField] private Slider player02HpBar;
+    public Image player01BackHPBar;
+    public Image player02BackHPBar;
+    [SerializeField] private Image player02HpBar;
     public float maxHp, player01CurrentHp, player02CurrentHp;
 
     public void player01HpDown(int damege)
     {
-        float downAmount = (float)((damege+1)*10);
+        float downAmount = (float)((damege + 1) * 10);
         player01CurrentHp -= downAmount;
 
         if (player01CurrentHp < 0)
             player01CurrentHp = 0;
         //player01HpBar.value = Mathf.Lerp(player01HpBar.value, (float)player01CurrentHp / (float)maxHp, Time.deltaTime * 5f);
-        player01HpBar.value = (float)player01CurrentHp / (float)maxHp;
+        player01HpBar.fillAmount = (float)player01CurrentHp / (float)maxHp;
     }
-    //¼±Çüº¸°£ ½á¼­ ºÎµå·´°Ô °¨¼ÒÇÏ°Ô ÇÏ·Á°í Çß´Âµ¥ ½ÇÆÐÇß½À´Ï´Ù..
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½á¼­ ï¿½Îµå·´ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ï·ï¿½ï¿½ï¿½ ï¿½ß´Âµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½..
 
     public void player02HpDown(int damege)
     {
-        float downAmount = (float)((damege +1) * 10);
+        float downAmount = (float)((damege + 1) * 10);
         player02CurrentHp -= downAmount;
+        fillB = player02BackHPBar.fillAmount;
 
         if (player02CurrentHp < 0)
             player02CurrentHp = 0;
         //player02HpBar.value = Mathf.Lerp(player02HpBar.value, (float)player02CurrentHp / (float)maxHp, Time.deltaTime *5f);
-        player02HpBar.value = (float)player02CurrentHp / (float)maxHp;
+        player02HpBar.fillAmount = (float)player02CurrentHp / (float)maxHp;
     }
 
     void Start()
     {
-        player01HpBar.value = ((float)player01CurrentHp) / (float)maxHp;
-        player02HpBar.value = ((float)player02CurrentHp) / (float)maxHp;
+        player01HpBar.fillAmount = ((float)player01CurrentHp) / (float)maxHp;
+        player02HpBar.fillAmount = ((float)player02CurrentHp) / (float)maxHp;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        UPdateUI1();
+        UPdateUI2();
     }
+
+
+    void UPdateUI1()
+    {
+        if (player01HpBar.fillAmount < player01BackHPBar.fillAmount)
+        {
+            float hFraction = player01CurrentHp / maxHp;
+            lerpTimer += Time.deltaTime;
+            float percentComplete = lerpTimer / chipSpeed;
+            player01CurrentHp = hFraction;
+            player01BackHPBar.color = Color.red;
+            player01BackHPBar.fillAmount = Mathf.Lerp(player01BackHPBar.fillAmount, hFraction, percentComplete);
+        }
+    }
+
+    void UPdateUI2()
+    {
+        if (player02HpBar.fillAmount < player02BackHPBar.fillAmount)
+        {
+            float hFraction = player02CurrentHp / maxHp;
+            lerpTimer += Time.deltaTime;
+            float percentComplete = lerpTimer / chipSpeed;
+            player02CurrentHp = hFraction;
+            player02BackHPBar.color = Color.red;
+            player02BackHPBar.fillAmount = Mathf.Lerp(fillB, hFraction, percentComplete);
+        }
+    }
+
+
+
+
 }

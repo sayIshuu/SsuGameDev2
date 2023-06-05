@@ -10,50 +10,28 @@ public class BossHPUI : MonoBehaviour
     [SerializeField] private float lerpTimer = 0f;
     public float maxHealth = 1000;
     public float chipSpeed = 2f;
-    public Image frontHealthBar;
-    public Image BackHealthBar;
+    public Image frontHealthBar1;
+    public Image BackHealthBar1;
+    public Image frontHealthBar2;
+    public Image BackHealthBar2;
 
     bool updateUI = false;
 
     public float fillSpeed = 3f;
-    /*
-    public GameObject BossUI;
-
     
-   
-   public bool UIOn=false;
-
-   public bool UION
-   {
-    get
-    {
-        return UIOn;
-    }
-    set
-    {
-        UIOn=value;
-        if(UIOn)
-        {
-            BossUI.SetActive(true);
-        }
-        else if(!UIOn)
-        {
-            BossUI.SetActive(false);
-        }
-    }
-   }
 
 
-    [SerializeField] GameObject boss;
+    HPmanager hpManager;
+  
 
 
-
+/*
     
     void Start()
     {
-        boss = GetComponent<HPmanager>();
-        maxHealth = boss.health;// boss대신 가져온 스크립트 내부 변수명에 health가 있어야합니다.
-    
+        hpManager =hpManager.GetComponent<HPmanager>();
+        maxHealth = hpManager.maxHp;// boss대신 가져온 스크립트 내부 변수명에 health가 있어야합니다.
+    frontHealthBar1=hpManager.player01CurrentHp;
       
     }
 
@@ -92,6 +70,6 @@ public class BossHPUI : MonoBehaviour
         }
     }
 
-
-    */
+*/
+    
 }
