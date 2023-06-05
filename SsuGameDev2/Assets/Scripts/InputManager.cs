@@ -45,22 +45,26 @@ public class InputManager : MonoBehaviour
             */
             if (player2Choice == Sign.Charge)
             {
+                AnimatorRight.Instance.Charge();
                 player2Energy++;
-                Debug.Log("Nothing Happen");
+                //Debug.Log("Nothing Happen");
             }
             else if (player2Choice == Sign.Block)
             {
-                Debug.Log("Nothing Happen");
+                AnimatorRight.Instance.Block();
+                //Debug.Log("Nothing Happen");
             }
             else if (player2Choice == Sign.Pa)
             {
-                Debug.Log("Player 2의 공격 성공!");
+                AnimatorRight.Instance.Pa();
+               // Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(1);
                 player2Energy = 0;
             }
             else if (player2Choice == Sign.EnergyPa)
             {
-                Debug.Log("Player 2의 공격 성공!");
+                AnimatorRight.Instance.EnergyPa();
+                //Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(3);
                 player2Energy = 0;
             }
@@ -72,26 +76,35 @@ public class InputManager : MonoBehaviour
         {
             if(player2Choice == Sign.None)
             {
+                AnimatorLeft.Instance.Pa();
+                AnimatorRight.Instance.Damaged();
                 player2Energy = 0;
                 HPmanager.Instance.player02HpDown(1);
             }
             else if (player2Choice == Sign.Charge)
             {
+                AnimatorLeft.Instance.Pa();
+                AnimatorRight.Instance.Damaged();
                 player2Energy = 0;
-                Debug.Log("Player 1의 공격 성공!");
+                //Debug.Log("Player 1의 공격 성공!");
                 HPmanager.Instance.player02HpDown(1);   //일반 Pa데미지는 모은기 양 -> 10으로 고정
             }
             else if(player2Choice == Sign.Block)
             {
-                Debug.Log("Blocking");
+                AnimatorLeft.Instance.Pa();
+                AnimatorRight.Instance.Block();
+                //Debug.Log("Blocking");
             }
             else if(player2Choice == Sign.Pa)
             {
-                Debug.Log("Pa 상쇄");
+                AnimatorLeft.Instance.Pa();
+                AnimatorRight.Instance.Pa();
+                //Debug.Log("Pa 상쇄");
                 player2Energy = 0;
             }
             else if(player2Choice == Sign.EnergyPa)
             {
+                AnimatorRight.Instance.EnergyPa();
                 Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(3);
                 player2Energy = 0;
@@ -104,27 +117,35 @@ public class InputManager : MonoBehaviour
         {
             if(player2Choice == Sign.None)
             {
-                Debug.Log("Nothing Happen");
+                AnimatorLeft.Instance.Block();
+                //Debug.Log("Nothing Happen");
             }
             else if (player2Choice == Sign.Charge)
             {
+                AnimatorLeft.Instance.Block();
+                AnimatorRight.Instance.Charge();
                 player2Energy++;
-                Debug.Log("Nothing Happen");
+                //Debug.Log("Nothing Happen");
             }
             else if (player2Choice == Sign.Block)
             {
-                Debug.Log("Nothing Happen");
+                AnimatorLeft.Instance.Block();
+                AnimatorRight.Instance.Block();
+                //Debug.Log("Nothing Happen");
             }
             else if (player2Choice == Sign.Pa)
             {
+                AnimatorLeft.Instance.Block();
+                AnimatorRight.Instance.Pa();
                 player2Energy = 0;
-                Debug.Log("Blocking");
+                //Debug.Log("Blocking");
             }
             else if (player2Choice == Sign.EnergyPa)
             {
+                AnimatorRight.Instance.EnergyPa();
                 Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(3);
-                player2Energy = 0;
+                player2Energy = 0; player1Energy = 0;
             }
         }
 
@@ -134,25 +155,32 @@ public class InputManager : MonoBehaviour
             player1Energy++;
             if(player2Choice == Sign.None)
             {
-                Debug.Log("Nothing Happen");
+                AnimatorLeft.Instance.Charge();
+                //Debug.Log("Nothing Happen");
             }
             else if (player2Choice == Sign.Charge)
             {
+                AnimatorLeft.Instance.Charge();
+                AnimatorRight.Instance.Charge();
                 player2Energy++;
-                Debug.Log("Nothing Happen");
+                //Debug.Log("Nothing Happen");
             }
             else if (player2Choice == Sign.Block)
             {
-                Debug.Log("Nothing Happen");
+                AnimatorLeft.Instance.Charge();
+                AnimatorRight.Instance.Block();
+                //Debug.Log("Nothing Happen");
             }
             else if (player2Choice == Sign.Pa)
             {
+                AnimatorRight.Instance.Pa();
                 player2Energy = 0; player1Energy = 0;
-                Debug.Log("Player 2의 공격 성공!");
+                //Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(1);
             }
             else if (player2Choice == Sign.EnergyPa)
             {
+                AnimatorRight.Instance.EnergyPa();
                 Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(3);
                 player2Energy = 0; player1Energy = 0;
@@ -164,30 +192,40 @@ public class InputManager : MonoBehaviour
         {
             if(player2Choice == Sign.None)
             {
-                Debug.Log("Player 1의 공격 성공!");
+                AnimatorLeft.Instance.EnergyPa();
+                AnimatorRight.Instance.Damaged();
+                //Debug.Log("Player 1의 공격 성공!");
                 HPmanager.Instance.player02HpDown(3);
             }
             else if (player2Choice == Sign.Charge)
             {
+                AnimatorLeft.Instance.EnergyPa();
+                AnimatorRight.Instance.Damaged();
                 player2Energy = 0;
-                Debug.Log("Player 1의 공격 성공!");
+                //Debug.Log("Player 1의 공격 성공!");
                 HPmanager.Instance.player02HpDown(3);
             }
             else if (player2Choice == Sign.Block)
             {
+                AnimatorLeft.Instance.EnergyPa();
+                AnimatorRight.Instance.Damaged();
                 player2Energy = 0;
-                Debug.Log("Player 1의 공격 성공!");
+                //Debug.Log("Player 1의 공격 성공!");
                 HPmanager.Instance.player02HpDown(3);
             }
             else if (player2Choice == Sign.Pa)
             {
-                Debug.Log("Player 1의 공격 성공!");
+                AnimatorLeft.Instance.EnergyPa();
+                AnimatorRight.Instance.Damaged();
+                //Debug.Log("Player 1의 공격 성공!");
                 HPmanager.Instance.player02HpDown(3);
                 player2Energy = 0;
             }
             else if (player2Choice == Sign.EnergyPa)
             {
-                Debug.Log("에너지파 상쇄");
+                AnimatorLeft.Instance.EnergyPa();
+                AnimatorRight.Instance.EnergyPa();
+                //Debug.Log("에너지파 상쇄");
                 player2Energy = 0;
             }
             player1Energy = 0;
@@ -202,6 +240,12 @@ public class InputManager : MonoBehaviour
     {
         player1Choice = Sign.None;
         player2Choice = Sign.None;
+    }
+
+    public void ResetAnimation()
+    {
+        AnimatorLeft.Instance.Stand();
+        AnimatorRight.Instance.Stand();
     }
 
     private void Update()

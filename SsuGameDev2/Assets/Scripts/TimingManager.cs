@@ -74,7 +74,6 @@ public class TimingManager : MonoBehaviour
         }
         else if (state == State.Select)//행동어떤걸 할지 선택
         {
-            
             if (timer > selectTime)
             {
                 Debug.Log("선택시간");
@@ -93,10 +92,12 @@ public class TimingManager : MonoBehaviour
                 if(HPmanager.Instance.player01CurrentHp == 0 || HPmanager.Instance.player02CurrentHp == 0) //만약 둘중한명의 플레이어의 목숨이 0일경우  
                 {
                     Debug.Log("종료");
+                    inputManager.ResetAnimation();
                     BeEndTime();
                 }
                 else //그게아니라면
                 {
+                    inputManager.ResetAnimation();
                     BeSelectTime();
                 }
             }

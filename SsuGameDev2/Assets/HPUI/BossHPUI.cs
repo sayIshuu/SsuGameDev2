@@ -42,7 +42,6 @@ public class BossHPUI : MonoBehaviour
         }
     }
    }
-    *
 
 
     [SerializeField] GameObject boss;
