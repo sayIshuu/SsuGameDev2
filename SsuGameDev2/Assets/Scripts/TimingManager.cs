@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class TimingManager : MonoBehaviour
 {
     enum State { Wait, Select, Result, End }
@@ -16,12 +16,17 @@ public class TimingManager : MonoBehaviour
     [SerializeField] float selectTime = 1f;//행동 선택시간
     [SerializeField] float ResultTime = 1f;//결과 보여주는 시간
 
-    [SerializeField] float minimumSelectTime= 0.5f;
-     [SerializeField]float decreaseTime= 0.1f;
+    [SerializeField] float minimumSelectTime = 0.5f;
+    [SerializeField] float decreaseTime = 0.1f;
 
     [SerializeField] InputManager inputManager;
 
 
+
+   public GameObject selectTimeLine;
+    public Slider timingUI;
+
+   
     bool canInputChange = true;
     public bool CanInputChange
     {
@@ -36,6 +41,12 @@ public class TimingManager : MonoBehaviour
     }
     void BeSelectTime()//입력값 넣기
     {
+        if (selectTime >= minimumSelectTime)
+        {
+            selectTime -= decreaseTime;
+        }
+        selectTimeLine.SetActive(true);
+        
         state = State.Select;
         CanInputChange = true;//입력값 바꿀수 있음
 
@@ -66,7 +77,7 @@ public class TimingManager : MonoBehaviour
         timer += Time.deltaTime;
         if (state == State.Wait)//게임 시작전 대기시간
         {
-           
+
             if (timer > waitTime)
             {
                 Debug.Log("대기시간");
@@ -77,14 +88,14 @@ public class TimingManager : MonoBehaviour
         }
         else if (state == State.Select)//행동어떤걸 할지 선택
         {
-            if(selectTime>=minimumSelectTime)
-            {
-                selectTime-=decreaseTime;
-            }
 
+
+            timingUI.value= timer /selectTime;
 
             if (timer > selectTime)
             {
+                selectTimeLine.SetActive(false);
+
                 Debug.Log("선택시간");
                 timer = 0f;
                 BeResultTime();
@@ -98,14 +109,14 @@ public class TimingManager : MonoBehaviour
             if (timer >= ResultTime)
             {
                 timer = 0f;
-                if(HPmanager.Instance.player01CurrentHp == 0) //만약 둘중한명의 플레이어의 목숨이 0일경우  
+                if (HPmanager.Instance.player01CurrentHp == 0) //만약 둘중한명의 플레이어의 목숨이 0일경우  
                 {
                     Debug.Log("종료");
                     inputManager.ResetAnimation();
                     AnimatorLeft.Instance.GameOver();
                     BeEndTime();
                 }
-                else if(HPmanager.Instance.player02CurrentHp == 0)
+                else if (HPmanager.Instance.player02CurrentHp == 0)
                 {
                     Debug.Log("종료");
                     inputManager.ResetAnimation();
