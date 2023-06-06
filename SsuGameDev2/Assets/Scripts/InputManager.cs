@@ -60,7 +60,7 @@ public class InputManager : MonoBehaviour
                 AnimatorLeft.Instance.Damaged();
                // Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(1);
-                player2Energy = 0;
+                player2Energy--;    player1Energy = 0;
             }
             else if (player2Choice == Sign.EnergyPa)
             {
@@ -68,7 +68,7 @@ public class InputManager : MonoBehaviour
                 AnimatorLeft.Instance.Damaged();
                 //Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(3);
-                player2Energy = 0;
+                player2Energy = 0;  player1Energy = 0;
             }
         }
 
@@ -102,7 +102,7 @@ public class InputManager : MonoBehaviour
                 AnimatorLeft.Instance.Pa();
                 AnimatorRight.Instance.Pa();
                 //Debug.Log("Pa 상쇄");
-                player2Energy = 0;
+                player2Energy--;
             }
             else if(player2Choice == Sign.EnergyPa)
             {
@@ -110,9 +110,10 @@ public class InputManager : MonoBehaviour
                 AnimatorLeft.Instance.Damaged();
                 //Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(3);
-                player2Energy = 0;
+                player2Energy = 0;  player1Energy = 0;
             }
-            player1Energy = 0;
+            if(player1Energy > 0)
+                player1Energy--;
         }
 
         //플레이어1의 막기
@@ -140,7 +141,7 @@ public class InputManager : MonoBehaviour
             {
                 AnimatorLeft.Instance.Block();
                 AnimatorRight.Instance.Pa();
-                player2Energy = 0;
+                player2Energy--;
                 //Debug.Log("Blocking");
             }
             else if (player2Choice == Sign.EnergyPa)
@@ -179,7 +180,7 @@ public class InputManager : MonoBehaviour
             {
                 AnimatorRight.Instance.Pa();
                 AnimatorLeft.Instance.Damaged();
-                player2Energy = 0; player1Energy = 0;
+                player2Energy--; player1Energy = 0;
                 //Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(1);
             }
