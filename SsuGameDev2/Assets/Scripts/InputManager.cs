@@ -23,6 +23,33 @@ public class InputManager : MonoBehaviour
 
     public int a = 0;
 
+    /*
+    public AudioSource leftattack;
+    public AudioSource rightattack;
+    public AudioSource leftcharge;
+    public AudioSource rightcharge;
+    public AudioSource block;
+    public AudioSource leftsuperattack;
+    public AudioSource rightsuperattack;
+    public AudioSource lefthit;
+    public AudioSource righthit;
+    public AudioSource death;
+    */
+
+    public AudioSource player1;
+    public AudioSource player2;
+
+    public AudioClip leftattackclip;
+    public AudioClip rightattackclip;
+    public AudioClip leftchargeclip;
+    public AudioClip rightchargeclip;
+    public AudioClip blockclip;
+    public AudioClip leftsuperattackclip;
+    public AudioClip rightsuperattackclip;
+    public AudioClip lefthitclip;
+    public AudioClip righthitclip;
+    public AudioClip deathclip;
+
     void Start()
     {
 
@@ -46,29 +73,41 @@ public class InputManager : MonoBehaviour
             if (player2Choice == Sign.Charge)
             {
                 AnimatorRight.Instance.Charge();
+                player2.clip = rightchargeclip;
+                player2.Play(); //audio in
                 player2Energy++;
                 //Debug.Log("Nothing Happen");
             }
             else if (player2Choice == Sign.Block)
             {
                 AnimatorRight.Instance.Block();
+                player2.clip = blockclip;
+                player2.Play(); //audio in
                 //Debug.Log("Nothing Happen");
             }
             else if (player2Choice == Sign.Pa)
             {
                 AnimatorRight.Instance.Pa();
                 AnimatorLeft.Instance.Damaged();
+                player1.clip = lefthitclip;
+                player2.clip = rightattackclip;
+                player1.Play(); //audio in
+                player2.Play(); //audio in
                // Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(1);
-                player2Energy--;    player1Energy = 0;
+                player2Energy--;    //player1Energy = 0;
             }
             else if (player2Choice == Sign.EnergyPa)
             {
                 AnimatorRight.Instance.EnergyPa();
                 AnimatorLeft.Instance.Damaged();
+                player1.clip = lefthitclip;
+                player2.clip = rightsuperattackclip;
+                player1.Play(); //audio in
+                player2.Play(); //audio in
                 //Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(3);
-                player2Energy = 0;  player1Energy = 0;
+                player2Energy = 0;  //player1Energy = 0;
             }
         }
 
@@ -80,14 +119,22 @@ public class InputManager : MonoBehaviour
             {
                 AnimatorLeft.Instance.Pa();
                 AnimatorRight.Instance.Damaged();
-                player2Energy = 0;
+                player1.clip = leftattackclip;
+                player2.clip = righthitclip;
+                player1.Play(); //audio in
+                player2.Play(); //audio in
+                //player2Energy = 0;
                 HPmanager.Instance.player02HpDown(1);
             }
             else if (player2Choice == Sign.Charge)
             {
                 AnimatorLeft.Instance.Pa();
                 AnimatorRight.Instance.Damaged();
-                player2Energy = 0;
+                player1.clip = leftattackclip;
+                player2.clip = righthitclip;
+                player1.Play(); //audio in
+                player2.Play(); //audio in
+                //player2Energy = 0;
                 //Debug.Log("Player 1의 공격 성공!");
                 HPmanager.Instance.player02HpDown(1);   //일반 Pa데미지는 모은기 양 -> 10으로 고정
             }
@@ -95,12 +142,20 @@ public class InputManager : MonoBehaviour
             {
                 AnimatorLeft.Instance.Pa();
                 AnimatorRight.Instance.Block();
+                player1.clip = leftattackclip;
+                player2.clip = blockclip;
+                player1.Play(); //audio in
+                player2.Play(); //audio in
                 //Debug.Log("Blocking");
             }
             else if(player2Choice == Sign.Pa)
             {
                 AnimatorLeft.Instance.Pa();
                 AnimatorRight.Instance.Pa();
+                player1.clip = leftattackclip;
+                player2.clip = rightattackclip;
+                player1.Play(); //audio in
+                player2.Play(); //audio in
                 //Debug.Log("Pa 상쇄");
                 player2Energy--;
             }
@@ -108,9 +163,13 @@ public class InputManager : MonoBehaviour
             {
                 AnimatorRight.Instance.EnergyPa();
                 AnimatorLeft.Instance.Damaged();
+                player1.clip = lefthitclip;
+                player2.clip = rightsuperattackclip;
+                player1.Play(); //audio in
+                player2.Play(); //audio in
                 //Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(3);
-                player2Energy = 0;  player1Energy = 0;
+                player2Energy = 0;  //player1Energy = 0;
             }
             if(player1Energy > 0)
                 player1Energy--;
@@ -122,12 +181,18 @@ public class InputManager : MonoBehaviour
             if(player2Choice == Sign.None)
             {
                 AnimatorLeft.Instance.Block();
+                player1.clip = blockclip;
+                player1.Play(); //audio in
                 //Debug.Log("Nothing Happen");
             }
             else if (player2Choice == Sign.Charge)
             {
                 AnimatorLeft.Instance.Block();
                 AnimatorRight.Instance.Charge();
+                player1.clip = blockclip;
+                player2.clip = rightchargeclip;
+                player1.Play(); //audio in
+                player2.Play(); //audio in
                 player2Energy++;
                 //Debug.Log("Nothing Happen");
             }
@@ -135,12 +200,20 @@ public class InputManager : MonoBehaviour
             {
                 AnimatorLeft.Instance.Block();
                 AnimatorRight.Instance.Block();
+                player1.clip = blockclip;
+                player2.clip = blockclip;
+                player1.Play(); //audio in
+                player2.Play(); //audio in
                 //Debug.Log("Nothing Happen");
             }
             else if (player2Choice == Sign.Pa)
             {
                 AnimatorLeft.Instance.Block();
                 AnimatorRight.Instance.Pa();
+                player1.clip = blockclip;
+                player2.clip = rightattackclip;
+                player1.Play(); //audio in
+                player2.Play(); //audio in
                 player2Energy--;
                 //Debug.Log("Blocking");
             }
@@ -148,9 +221,13 @@ public class InputManager : MonoBehaviour
             {
                 AnimatorRight.Instance.EnergyPa();
                 AnimatorLeft.Instance.Damaged();
+                player1.clip = lefthitclip;
+                player2.clip = rightsuperattackclip;
+                player1.Play(); //audio in
+                player2.Play(); //audio in
                 //Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(3);
-                player2Energy = 0; player1Energy = 0;
+                player2Energy = 0; //player1Energy = 0;
             }
         }
 
@@ -161,12 +238,18 @@ public class InputManager : MonoBehaviour
             if(player2Choice == Sign.None)
             {
                 AnimatorLeft.Instance.Charge();
+                player1.clip = leftchargeclip;
+                player1.Play(); //audio in
                 //Debug.Log("Nothing Happen");
             }
             else if (player2Choice == Sign.Charge)
             {
                 AnimatorLeft.Instance.Charge();
                 AnimatorRight.Instance.Charge();
+                player1.clip = leftchargeclip;
+                player2.clip = rightattackclip;
+                player1.Play(); //audio in
+                player2.Play(); //audio in
                 player2Energy++;
                 //Debug.Log("Nothing Happen");
             }
@@ -174,13 +257,21 @@ public class InputManager : MonoBehaviour
             {
                 AnimatorLeft.Instance.Charge();
                 AnimatorRight.Instance.Block();
+                player1.clip = leftchargeclip;
+                player2.clip = blockclip;
+                player1.Play(); //audio in
+                player2.Play(); //audio in
                 //Debug.Log("Nothing Happen");
             }
             else if (player2Choice == Sign.Pa)
             {
                 AnimatorRight.Instance.Pa();
                 AnimatorLeft.Instance.Damaged();
-                player2Energy--; player1Energy = 0;
+                player1.clip = lefthitclip;
+                player2.clip = rightattackclip;
+                player1.Play(); //audio in
+                player2.Play(); //audio in
+                player2Energy--; //player1Energy = 0;
                 //Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(1);
             }
@@ -188,9 +279,14 @@ public class InputManager : MonoBehaviour
             {
                 AnimatorRight.Instance.EnergyPa();
                 AnimatorLeft.Instance.Damaged();
+                player1.clip = lefthitclip;
+                player2.clip = rightsuperattackclip;
+                player1.Play(); //audio in
+                player2.Play(); //audio in
                 //Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(3);
-                player2Energy = 0; player1Energy = 0;
+                player2Energy = 0; //player1Energy = 0;
+                player1Energy--; //수정
             }
         }
 
@@ -201,6 +297,10 @@ public class InputManager : MonoBehaviour
             {
                 AnimatorLeft.Instance.EnergyPa();
                 AnimatorRight.Instance.Damaged();
+                player1.clip = leftsuperattackclip;
+                player2.clip = righthitclip;
+                player1.Play(); //audio in
+                player2.Play(); //audio in
                 //Debug.Log("Player 1의 공격 성공!");
                 HPmanager.Instance.player02HpDown(3);
             }
@@ -208,7 +308,11 @@ public class InputManager : MonoBehaviour
             {
                 AnimatorLeft.Instance.EnergyPa();
                 AnimatorRight.Instance.Damaged();
-                player2Energy = 0;
+                player1.clip = leftsuperattackclip;
+                player2.clip = righthitclip;
+                player1.Play(); //audio in
+                player2.Play(); //audio in
+                //player2Energy = 0;
                 //Debug.Log("Player 1의 공격 성공!");
                 HPmanager.Instance.player02HpDown(3);
             }
@@ -216,7 +320,11 @@ public class InputManager : MonoBehaviour
             {
                 AnimatorLeft.Instance.EnergyPa();
                 AnimatorRight.Instance.Damaged();
-                player2Energy = 0;
+                player1.clip = leftsuperattackclip;
+                player2.clip = righthitclip;
+                player1.Play(); //audio in
+                player2.Play(); //audio in
+                //player2Energy = 0;
                 //Debug.Log("Player 1의 공격 성공!");
                 HPmanager.Instance.player02HpDown(3);
             }
@@ -224,14 +332,22 @@ public class InputManager : MonoBehaviour
             {
                 AnimatorLeft.Instance.EnergyPa();
                 AnimatorRight.Instance.Damaged();
+                player1.clip = leftsuperattackclip;
+                player2.clip = righthitclip;
+                player1.Play(); //audio in
+                player2.Play(); //audio in
                 //Debug.Log("Player 1의 공격 성공!");
                 HPmanager.Instance.player02HpDown(3);
-                player2Energy = 0;
+                player2Energy--; //수정(player2Energy = 0;)
             }
             else if (player2Choice == Sign.EnergyPa)
             {
                 AnimatorLeft.Instance.EnergyPa();
                 AnimatorRight.Instance.EnergyPa();
+                player1.clip = leftsuperattackclip;
+                player2.clip = rightsuperattackclip;
+                player1.Play(); //audio in
+                player2.Play(); //audio in
                 //Debug.Log("에너지파 상쇄");
                 player2Energy = 0;
             }

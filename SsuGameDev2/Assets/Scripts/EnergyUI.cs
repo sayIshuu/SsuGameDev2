@@ -12,6 +12,9 @@ public class EnergyUI : MonoBehaviour
     public GameObject player2charge2;
     public GameObject player2charge3;
 
+    public Sprite energy;
+    public Sprite noenergy;
+
     GameObject InputManager;
 
     void Awake()
@@ -31,48 +34,60 @@ public class EnergyUI : MonoBehaviour
         if (InputManager.GetComponent<InputManager>().player1Energy == 0)
         {
             //Debug.Log("player1Energy is 0");
-            player1charge1.GetComponent<SpriteRenderer>().material.color = Color.white;
-            player1charge2.GetComponent<SpriteRenderer>().material.color = Color.white;
-            player1charge3.GetComponent<SpriteRenderer>().material.color = Color.white;
+            player1charge1.GetComponent<SpriteRenderer>().sprite = noenergy;
+            player1charge2.GetComponent<SpriteRenderer>().sprite = noenergy;
+            player1charge3.GetComponent<SpriteRenderer>().sprite = noenergy;
         }
         else if (InputManager.GetComponent<InputManager>().player1Energy == 1)
         {
            // Debug.Log("player1Energy is 1");
-            player1charge1.GetComponent<SpriteRenderer>().material.color = Color.red;
+            player1charge1.GetComponent<SpriteRenderer>().sprite = energy;
+            player1charge2.GetComponent<SpriteRenderer>().sprite = noenergy;
+            player1charge3.GetComponent<SpriteRenderer>().sprite = noenergy;
         }
         else if (InputManager.GetComponent<InputManager>().player1Energy == 2)
         {
             //Debug.Log("player1Energy is 2");
-            player1charge2.GetComponent<SpriteRenderer>().material.color = Color.red;
+            player1charge1.GetComponent<SpriteRenderer>().sprite = energy;
+            player1charge2.GetComponent<SpriteRenderer>().sprite = energy;
+            player1charge3.GetComponent<SpriteRenderer>().sprite = noenergy;
         }
         else if (InputManager.GetComponent<InputManager>().player1Energy == 3)
         {
             //Debug.Log("player1Energy is 3");
-            player1charge3.GetComponent<SpriteRenderer>().material.color = Color.red;
+            player1charge1.GetComponent<SpriteRenderer>().sprite = energy;
+            player1charge2.GetComponent<SpriteRenderer>().sprite = energy;
+            player1charge3.GetComponent<SpriteRenderer>().sprite = energy;
         }
 
         //player2
         if (InputManager.GetComponent<InputManager>().player2Energy == 0)
         {
             //Debug.Log("player2Energy is 0");
-            player2charge1.GetComponent<SpriteRenderer>().material.color = Color.white;
-            player2charge2.GetComponent<SpriteRenderer>().material.color = Color.white;
-            player2charge3.GetComponent<SpriteRenderer>().material.color = Color.white;
+            player2charge1.GetComponent<SpriteRenderer>().sprite = noenergy;
+            player2charge2.GetComponent<SpriteRenderer>().sprite = noenergy;
+            player2charge3.GetComponent<SpriteRenderer>().sprite = noenergy;
         }
         else if (InputManager.GetComponent<InputManager>().player2Energy == 1)
         {
             //Debug.Log("player2Energy is 1");
-            player2charge1.GetComponent<SpriteRenderer>().material.color = Color.red;
+            player2charge1.GetComponent<SpriteRenderer>().sprite = energy;
+            player2charge2.GetComponent<SpriteRenderer>().sprite = noenergy;
+            player2charge3.GetComponent<SpriteRenderer>().sprite = noenergy;
         }
         else if (InputManager.GetComponent<InputManager>().player2Energy == 2)
         {
             //Debug.Log("player2Energy is 2");
-            player2charge2.GetComponent<SpriteRenderer>().material.color = Color.red;
+            player2charge1.GetComponent<SpriteRenderer>().sprite = energy;
+            player2charge2.GetComponent<SpriteRenderer>().sprite = energy;
+            player2charge3.GetComponent<SpriteRenderer>().sprite = noenergy;
         }
         else if (InputManager.GetComponent<InputManager>().player2Energy == 3)
         {
             //Debug.Log("player2Energy is 3");
-            player2charge3.GetComponent<SpriteRenderer>().material.color = Color.red;
+            player2charge1.GetComponent<SpriteRenderer>().sprite = energy;
+            player2charge2.GetComponent<SpriteRenderer>().sprite = energy;
+            player2charge3.GetComponent<SpriteRenderer>().sprite = energy;
         }
     }
 

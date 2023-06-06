@@ -6,7 +6,18 @@ public class TimingManager : MonoBehaviour
 {
     enum State { Wait, Select, Result, End }
 
+    public AudioSource bgm;
+    public AudioClip bgmclip;
 
+    public AudioSource kosound;
+    public AudioClip kosoundclip;
+
+    public AudioSource winsound;
+    public AudioClip winsoundclip;
+
+    public SpriteRenderer korenderer;
+    public Sprite player1winImg;
+    public Sprite player2winImg;
 
     State state;
 
@@ -64,11 +75,31 @@ public class TimingManager : MonoBehaviour
         //결과보여주기
     }
 
+    void playerwin()
+    {
+        if (HPmanager.Instance.player01CurrentHp == 0)
+        {
+            GetComponent<SpriteRenderer>().sprite = player2winImg;
+            winsound.Play();
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().sprite = player1winImg;
+            winsound.Play();
+        }
+    }
+
 
     // Start is called before the first frame update
     void Start()
     {
         state = State.Wait;
+
+        korenderer = GetComponent<SpriteRenderer>();
+        //winrenderer = GetComponent<SpriteRenderer>();
+
+        korenderer.enabled = false;
+        //winrenderer.enabled = false;
     }
 
     // Update is called once per frame
@@ -114,6 +145,10 @@ public class TimingManager : MonoBehaviour
                     Debug.Log("종료");
                     inputManager.ResetAnimation();
                     AnimatorLeft.Instance.GameOver();
+                    bgm.volume = 0f;
+                    korenderer.enabled = true;
+                    kosound.Play();
+                    Invoke("playerwin", 3);
                     BeEndTime();
                 }
                 else if (HPmanager.Instance.player02CurrentHp == 0)
@@ -121,6 +156,10 @@ public class TimingManager : MonoBehaviour
                     Debug.Log("종료");
                     inputManager.ResetAnimation();
                     AnimatorRight.Instance.GameOver();
+                    bgm.volume = 0f;
+                    korenderer.enabled = true;
+                    kosound.Play();
+                    Invoke("playerwin", 3);
                     BeEndTime();
                 }
                 else //그게아니라면
