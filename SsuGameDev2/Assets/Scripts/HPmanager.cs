@@ -30,7 +30,8 @@ public class HPmanager : MonoBehaviour
     //=============================================================
 
     public float chipSpeed = 2f;
-    [SerializeField] private float lerpTimer = 0f;
+    [SerializeField] private float lerpTimer1 = 0f;
+    [SerializeField] private float lerpTimer2 = 0f;
     [SerializeField] private Image player01HpBar;
 
     public Image player01BackHPBar;
@@ -73,31 +74,41 @@ public class HPmanager : MonoBehaviour
     {
         UPdateUI1();
         UPdateUI2();
+        if (lerpTimer1 >= 1)
+            lerpTimer1 = 0;
+        if (lerpTimer2 >= 1)
+            lerpTimer2 = 0;
     }
 
 
     void UPdateUI1()
     {
-        if (player01HpBar.fillAmount < player01BackHPBar.fillAmount)
+        float fillF = player01HpBar.fillAmount;
+        float fillB = player01BackHPBar.fillAmount;
+        float hFraction = player01CurrentHp / maxHp;
+        if (player01HpBar.fillAmount < fillB)
         {
-            float hFraction = player01CurrentHp / maxHp;
-            lerpTimer += Time.deltaTime;
-            float percentComplete = lerpTimer / chipSpeed;
-            player01CurrentHp = hFraction;
+            player01HpBar.fillAmount = hFraction;
             player01BackHPBar.color = Color.red;
-            player01BackHPBar.fillAmount = Mathf.Lerp(player01BackHPBar.fillAmount, hFraction, percentComplete);
+            lerpTimer1 += Time.deltaTime;
+            float percentComplete = lerpTimer1 / chipSpeed;
+
+            player01BackHPBar.fillAmount = Mathf.Lerp(fillB, hFraction, percentComplete);
         }
     }
 
     void UPdateUI2()
     {
-        if (player02HpBar.fillAmount < player02BackHPBar.fillAmount)
+        float fillF = player02HpBar.fillAmount;
+        float fillB = player02BackHPBar.fillAmount;
+        float hFraction = player02CurrentHp / maxHp;
+        if (player02HpBar.fillAmount < fillB)
         {
-            float hFraction = player02CurrentHp / maxHp;
-            lerpTimer += Time.deltaTime;
-            float percentComplete = lerpTimer / chipSpeed;
-            player02CurrentHp = hFraction;
+            player02HpBar.fillAmount = hFraction;
             player02BackHPBar.color = Color.red;
+            lerpTimer2 += Time.deltaTime;
+            float percentComplete = lerpTimer2 / chipSpeed;
+
             player02BackHPBar.fillAmount = Mathf.Lerp(fillB, hFraction, percentComplete);
         }
     }
