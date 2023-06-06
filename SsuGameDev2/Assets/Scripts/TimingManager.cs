@@ -16,6 +16,9 @@ public class TimingManager : MonoBehaviour
     [SerializeField] float selectTime = 1f;//행동 선택시간
     [SerializeField] float ResultTime = 1f;//결과 보여주는 시간
 
+    [SerializeField] float minimumSelectTime= 0.5f;
+     [SerializeField]float decreaseTime= 0.1f;
+
     [SerializeField] InputManager inputManager;
 
 
@@ -74,6 +77,12 @@ public class TimingManager : MonoBehaviour
         }
         else if (state == State.Select)//행동어떤걸 할지 선택
         {
+            if(selectTime>=minimumSelectTime)
+            {
+                selectTime-=decreaseTime;
+            }
+
+
             if (timer > selectTime)
             {
                 Debug.Log("선택시간");
