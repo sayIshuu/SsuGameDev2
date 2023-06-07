@@ -95,7 +95,9 @@ public class InputManager : MonoBehaviour
                 player2.Play(); //audio in
                // Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(1);
-                player2Energy--;    //player1Energy = 0;
+                player2Energy--;    
+                if(player1Energy >0)
+                    player1Energy--;
             }
             else if (player2Choice == Sign.EnergyPa)
             {
@@ -107,7 +109,7 @@ public class InputManager : MonoBehaviour
                 player2.Play(); //audio in
                 //Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(3);
-                player2Energy = 0;  //player1Energy = 0;
+                player2Energy = 0;  player1Energy = 0;
             }
         }
 
@@ -123,7 +125,8 @@ public class InputManager : MonoBehaviour
                 player2.clip = righthitclip;
                 player1.Play(); //audio in
                 player2.Play(); //audio in
-                //player2Energy = 0;
+                if (player2Energy > 0)
+                    player2Energy--;
                 HPmanager.Instance.player02HpDown(1);
             }
             else if (player2Choice == Sign.Charge)
@@ -134,7 +137,8 @@ public class InputManager : MonoBehaviour
                 player2.clip = righthitclip;
                 player1.Play(); //audio in
                 player2.Play(); //audio in
-                //player2Energy = 0;
+                if (player2Energy > 0)
+                    player2Energy--;
                 //Debug.Log("Player 1의 공격 성공!");
                 HPmanager.Instance.player02HpDown(1);   //일반 Pa데미지는 모은기 양 -> 10으로 고정
             }
@@ -169,7 +173,7 @@ public class InputManager : MonoBehaviour
                 player2.Play(); //audio in
                 //Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(3);
-                player2Energy = 0;  //player1Energy = 0;
+                player2Energy = 0;  player1Energy = 0;
             }
             if(player1Energy > 0)
                 player1Energy--;
@@ -227,7 +231,7 @@ public class InputManager : MonoBehaviour
                 player2.Play(); //audio in
                 //Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(3);
-                player2Energy = 0; //player1Energy = 0;
+                player2Energy = 0; player1Energy = 0;
             }
         }
 
@@ -271,7 +275,9 @@ public class InputManager : MonoBehaviour
                 player2.clip = rightattackclip;
                 player1.Play(); //audio in
                 player2.Play(); //audio in
-                player2Energy--; //player1Energy = 0;
+                player2Energy--; player1Energy--;
+                if (player1Energy > 0)
+                    player1Energy--;
                 //Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(1);
             }
@@ -286,7 +292,7 @@ public class InputManager : MonoBehaviour
                 //Debug.Log("Player 2의 공격 성공!");
                 HPmanager.Instance.player01HpDown(3);
                 player2Energy = 0; //player1Energy = 0;
-                player1Energy--; //수정
+                player1Energy = 0; //수정
             }
         }
 
@@ -301,7 +307,7 @@ public class InputManager : MonoBehaviour
                 player2.clip = righthitclip;
                 player1.Play(); //audio in
                 player2.Play(); //audio in
-                //Debug.Log("Player 1의 공격 성공!");
+                player2Energy = 0;
                 HPmanager.Instance.player02HpDown(3);
             }
             else if (player2Choice == Sign.Charge)
@@ -312,7 +318,7 @@ public class InputManager : MonoBehaviour
                 player2.clip = righthitclip;
                 player1.Play(); //audio in
                 player2.Play(); //audio in
-                //player2Energy = 0;
+                player2Energy = 0;
                 //Debug.Log("Player 1의 공격 성공!");
                 HPmanager.Instance.player02HpDown(3);
             }
@@ -324,7 +330,7 @@ public class InputManager : MonoBehaviour
                 player2.clip = righthitclip;
                 player1.Play(); //audio in
                 player2.Play(); //audio in
-                //player2Energy = 0;
+                player2Energy = 0;
                 //Debug.Log("Player 1의 공격 성공!");
                 HPmanager.Instance.player02HpDown(3);
             }
@@ -338,7 +344,7 @@ public class InputManager : MonoBehaviour
                 player2.Play(); //audio in
                 //Debug.Log("Player 1의 공격 성공!");
                 HPmanager.Instance.player02HpDown(3);
-                player2Energy--; //수정(player2Energy = 0;)
+                player2Energy = 0;
             }
             else if (player2Choice == Sign.EnergyPa)
             {

@@ -32,7 +32,7 @@ public class TimingManager : MonoBehaviour
 
     [SerializeField] InputManager inputManager;
 
-
+    [SerializeField] float minimumResultTime = 0.5f;
 
    public GameObject selectTimeLine;
     public Slider timingUI;
@@ -64,6 +64,10 @@ public class TimingManager : MonoBehaviour
     }
     void BeResultTime()// 입력값 결과보여주기
     {
+        if(ResultTime>=minimumResultTime)
+        {
+            ResultTime -= decreaseTime * 0.5f;
+        }
         state = State.Result;
         CanInputChange = false;//입력값 바꿀수없음
 
@@ -122,7 +126,7 @@ public class TimingManager : MonoBehaviour
 
 
             timingUI.value= timer /selectTime;
-
+            //Debug.Log(selectTime);
             if (timer > selectTime)
             {
                 selectTimeLine.SetActive(false);
