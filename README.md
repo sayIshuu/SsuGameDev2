@@ -20,7 +20,11 @@
 
 
 ![드래곤볼02](https://github.com/user-attachments/assets/e6ec09aa-f6b5-4f08-9093-22677e9ecbc3)
+
 기를 모으고, 공격을 막고, 공격끼리 상쇄되는 모습
 
+<br/>
+
 ![드래곤볼03](https://github.com/user-attachments/assets/d53e30b4-491f-49b2-94d1-2df371d6a886)
+
 가운데 바가 줄어드는 시간이 점점 빨라져 결판이 나는 모습
